@@ -13,6 +13,10 @@ use Illuminate\Http\Request;
 |
 */
 
+Route::group(['namespace' => 'Api'], function(){
+    Route::resource('categories', 'CategoryController', ['except' => ['create', 'edit']]);
+});
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
