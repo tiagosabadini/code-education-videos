@@ -15,6 +15,8 @@ use Illuminate\Http\Request;
 
 Route::group(['namespace' => 'Api'], function(){
     Route::resource('categories', 'CategoryController', ['except' => ['create', 'edit']]);
+    Route::resource('genres', 'GenreController', ['except' => ['create', 'edit']]);
+    Route::get('/genres/{genre}/restore', [\App\Http\Controllers\Api\GenreController::class, 'restore']);
 });
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
