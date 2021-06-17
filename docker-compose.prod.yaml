@@ -4,9 +4,7 @@ services:
 
     app:
         build: .
-        container_name: micro-videos-app
-        entrypoint: dockerize -wait tcp://db:3306 -timeout 40s ./.docker/entrypoint.sh
-
+        container_name: app
         volumes:
             - .:/var/www
         networks:
@@ -31,7 +29,7 @@ services:
 
     db:
         build: ./.docker/mysql
-        container_name: micro-videos-db
+        container_name: db
         restart: always
         tty: true
         ports:
@@ -40,14 +38,13 @@ services:
             - ./.docker/dbdata:/var/lib/mysql
             - ./.docker/mysql:/docker-entrypoint-initdb.d
         environment:
-            - MYSQL_DATABASE=code_micro_videos
+            - MYSQL_USER=root
             - MYSQL_ROOT_PASSWORD=root
         networks:
             - app-network
 
     redis:
         image: redis:alpine
-        container_name: micro-videos-redis
         expose:
             - 6379
         networks:
