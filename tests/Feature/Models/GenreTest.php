@@ -40,6 +40,6 @@ class GenreTest extends TestCase
 
         $this->assertEquals('genre_test', $genre->name);
         $this->assertTrue((bool)$genre->is_active);
-        $this->assertRegExp('^-?\d{1,2}\.\d{6,}\s*,\s*-?\d{1,2}\.\d{6,}$', $genre->id);
+        $this->assertRegExp('/^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i', $genre->id);
     }
 }
